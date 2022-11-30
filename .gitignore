@@ -1,129 +1,289 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
 
-# C extensions
-*.so
+from cProfile import label
+from cgitb import text
+from fileinput import close
+import random
+from re import I, M
+import string
+from tkinter import *  # type: ignore
+import os
+from tkinter import messagebox
+from tkinter import font
+from turtle import Screen, back, bgcolor
+from webbrowser import BackgroundBrowser
+from xml.dom.minidom import Entity
+import tkinter
+from setuptools import Command
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+def reg_user():  # 2
+    messagebox.showinfo('SUCCESS', "REG SUCESS", )
+    username_info = username.get()
+    Password_info = Password.get()
+    file = open(username_info, 'w')
+    file.write(username_info+'\n')
+    file.write(Password_info)
+    file.close()
+    Label(screen1, text="registeration sucess")
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+def login():  # 2
+    global screen2
+    global username_verify
+    global Password_verify
+    username_verify = StringVar()
+    Password_verify = StringVar()
+    screen2 = Toplevel(Screen)  # type: ignore
+    screen2.geometry('1080x630')
+    screen2.configure(bg='#F9930E')
+    screen2.title("login")
+    element1 = Label(screen2, font=("MS PMincho", 45),
+                     bg="#F9930E", fg="white", text="LOGIN")
 
-# Translations
-*.mo
-*.pot
+    element2 = Label(screen2, height=3, width=14, bg="#F9930E", fg="white",
+                     font=("MS PMincho", 16, font.BOLD), text="Username")
+    element3 = Entry(screen2, width=44, font="times 18", relief=GROOVE, bd=5, fg="orange",
+                     textvariable=username_verify)
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+    element4 = Label(screen2, height=3, width=14, bg="#F9930E", fg="white",
+                     font=("DokChampa", 16, font.BOLD), text="Password")
+    element5 = Entry(screen2, width=44, font="times 18", relief=GROOVE, bd=5, fg="orange",
+                     textvariable=Password_verify)
 
-# Flask stuff:
-instance/
-.webassets-cache
+    element6 = Button(screen2, font=("Courier New Baltic", 20),  text="login", height=1, fg="white", bg="#F9930E", relief=FLAT,
+                      width=5, command=verify)
+    element1.pack(pady=25)
+    element2.pack(pady=15)
+    element3.pack(pady=3)
+    element4.pack(pady=15)
+    element5.pack(pady=3)
+    element6.pack(pady=20)
 
-# Scrapy stuff:
-.scrapy
 
-# Sphinx documentation
-docs/_build/
+def verify():  # 3
+    username1 = username_verify.get()
+    Password1 = Password_verify.get()
 
-# PyBuilder
-target/
+    os_list = os.listdir()
+    if username1 in os_list:
+        file = open(username1, 'r')
+        v = file.read().split()
+        if Password1 in v:
+            messagebox.showinfo('SUCCESS', "LOGIN SUCESS", )
+            scree3()
+        else:
+            messagebox.showinfo('NOT FOUND', "PASSWORD is wrong")
 
-# Jupyter Notebook
-.ipynb_checkpoints
+    else:
+        messagebox.showinfo("no user", "Please Register your self")
 
-# IPython
-profile_default/
-ipython_config.py
 
-# pyenv
-.python-version
+def scree3():  # 4
+    global Screen3
+    global Name_entry
+    global Name_entry2
+    Name_entry = StringVar()
+    Name_entry2 = StringVar()
+    Screen3 = Tk()
+    Screen3.configure(bg="orange")
+    Screen3.geometry('1080x900')
+    element1 = Label(Screen3, fg="white", bg="orange", font=(
+        "MS PMincho", 45), text="BOOK YOUR TRIP").pack()
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+    clicked = StringVar()
+    clicked.set("01")
+    clicked2 = StringVar()
+    clicked2.set("01")
+    place = [
+        "01",
+        "02A",
+        "02B",
+        "03A",
+        "03B",
+        "08A",
+        "08B",
+        "08C",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15A",
+        "15B",
+        "18",
+        "19",
+        "20",
+        "21A",
+        "21B",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "41A",
+        "41B",
+        "41C",
+        "41D",
+        "42",
+        "45",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51A",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+    ]
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+    lable1 = Label(Screen3, fg="white", bg="orange", font=(
+        "MS PMincho", 25), text="ENTER NAME").pack(pady=11)
+    entery_name2 = Entry(Screen3, font=("MS PMincho", 25),
+                         textvariable=Name_entry).pack(pady=10)
+    lable2 = Label(Screen3, fg="white", bg="orange", font=(
+        "MS PMincho", 25), text="ENTER Reg No.").pack(pady=13)
+    entery_name = Entry(Screen3, font=("MS PMincho", 25),
+                        textvariable=Name_entry2).pack(pady=13)
+    labe3 = Label(Screen3, fg="white", bg="orange",
+                  font=("MS PMincho", 25),  text="From").pack(pady=11)
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+    placeMenu1_from = OptionMenu(Screen3, clicked, *place)  # type: ignore
+    placeMenu1_from.pack(pady=11)
 
-# SageMath parsed files
-*.sage.py
+    placeMenu1_from.configure(bg="orange", fg="white", width=10, bd=7,
+                              font=("Courier New Baltic", 8))
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+    labe4 = Label(Screen3, fg="white", bg="orange",
+                  font=("MS PMincho", 25),  text="To").pack(pady=11)
 
-# Spyder project settings
-.spyderproject
-.spyproject
+    placeMenu2_to = OptionMenu(Screen3, clicked2, *place)  # type: ignore
+    placeMenu2_to.pack(pady=11)
+    placeMenu2_to.configure(bg="orange", fg="white", width=10, bd=7,
+                            font=("Courier New Baltic", 8))
 
-# Rope project settings
-.ropeproject
+    Label(Screen3, fg="white", bg="orange", font=(
+        "MS PMincho", 25), text="No. of Passengers").pack(pady=12)  # -----
+    people = IntVar()
+    people.get()
 
-# mkdocs documentation
-/site
+    Radiobutton(Screen3, text="1", variable=people, value=1,).pack()
+    Radiobutton(Screen3, text="2", variable=people, value=2,).pack()
+    Radiobutton(Screen3, text="3", variable=people, value=3,).pack()
+    Radiobutton(Screen3, text="4", variable=people, value=4,).pack()
+    Radiobutton(Screen3, text="5", variable=people, value=5,).pack()
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+    # map = Button(Screen3, text='MAP', font=("MS PMincho", 23), fg="white", bg="orange", height=2, relief=FLAT,
+    #              width=15, command=Map1)
+    submit = Button(Screen3, text='GENERATE OTP', font=("MS PMincho", 26), fg="white", bg="orange", height=2, relief=FLAT,
+                    width=15, command=otpmaker)
+    # map.pack()
+    submit.pack()
+    Screen3.mainloop()
 
-# Pyre type checker
-.pyre/
+
+# def Map1():
+#     Map2 = Tk()
+#     Map2.geometry("1082x1643")
+#     # Screen.minsize(200,200)
+#     # Screen.maxsize(100, 100)
+#     bg = PhotoImage(file="Siteplan16.png")
+#     Background2 = Label(Map2, image=bg)
+#     Background2.pack()
+#     Map2.mainloop()
+
+
+def otpmaker():
+    Screen4 = Tk()
+    Screen4.configure(bg="orange")
+    Screen4.geometry("900x400")
+    global otp
+    otp = random.randint(1000, 9999)
+    Label(Screen4, bg="orange", font=("MS PMincho", 26),
+          fg="white", relief=FLAT, text=otp).pack(pady=45, padx=12)
+    Label(Screen4, text="Do not share with aney one except cab Driver",
+          font=("MS PMincho", 26), fg="white", bg="orange", relief=FLAT).pack(pady=45, padx=12)
+    Screen4.mainloop()
+
+
+def reg():  # 2
+    global screen1
+    screen1 = Toplevel(Screen)  # type: ignore
+    screen1.geometry('1080x630')
+    screen1.title('registter')
+    screen1.configure(bg="orange")
+    global username
+    global Password
+    global username_entry
+    global Password_entry
+    username = StringVar()
+    Password = StringVar()
+
+    element1 = Label(screen1, fg="white", bg="orange", font=("MS PMincho", 45),
+                     text='Fill all details to register')
+    element1.pack(pady=25)
+
+    element2 = Label(screen1, fg="white", bg="orange",
+                     font=("MS PMincho", 25), text='username ')
+    element2.pack(pady=25)
+
+    username_entry = Entry(screen1, fg="orange", bd=5, relief=GROOVE, font=(
+        "MS PMincho", 25), textvariable=username).pack()
+
+    element3 = Label(screen1, fg="white", bg="orange",
+                     font=("MS PMincho", 25), text='Password ')
+    element3.pack(pady=25)
+
+    Password_entry = Entry(screen1, bd=5,  fg="orange", relief=GROOVE, font=(
+        "MS PMincho", 25), textvariable=Password).pack()
+
+    element5 = Button(screen1, text='Register', font=("MS PMincho", 26), fg="white", bg="orange", height=2, relief=FLAT,
+                      width=15, command=reg_user)
+    element5.pack(pady=25)
+
+
+def main():
+    global Screen                                                              # 1
+
+    Screen = Tk()
+    Screen.geometry('1080x630')
+    # Screen.minsize(200, 200)
+    # Screen.maxsize(100, 100)
+    bg = PhotoImage(file="front.png")
+
+    Background = Label(Screen, image=bg)
+    Background.place(x=0, y=0, relwidth=1, relheight=1)
+
+    element1 = Label(text='LOGIN FROM', bg="orange", fg="white", bd=12, relief=GROOVE,
+                     font=("Nyala", 50), pady=1, padx=80)
+
+    element2 = Button(text='LOGIN', font="times 15 ", bg="orange", fg="white", bd=5, relief=GROOVE,
+                      height=1, width=25, padx=6, pady=3, command=login)
+
+    element3 = Button(text='NEW USER', font="times 15 ", bg="orange", fg="white", padx=21, pady=4,
+                      height=1, width=25, bd=5, relief=GROOVE, command=reg)
+
+    element1.pack(pady=44)
+    element2.pack(pady=14)
+    element3.pack()
+
+    Screen.mainloop()
+
+
+main()
